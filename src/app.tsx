@@ -1,9 +1,9 @@
-import React from "react";
+import Login from "./compnents";
 
-const App: React.FC = () => {
+const App= (): JSX.Element => {
   return (
     <>
-      <h1>Olá mundo!</h1>
+     <Login/>
     </>
   );
 };
