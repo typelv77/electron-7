@@ -19,7 +19,7 @@ const Login = (): JSX.Element => {
       display={"flex"}
       justifyContent={"center"}
       alignItems={"center"}
-      backgroundImage={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEvZjqwXMyPCtW9j3IO5uWHOvOwrk8HBYXqQ&usqp=CAU"}
+      backgroundImage={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSS53eMRi5HMYXDYXjPUbv5i4ZRFaB0RmHLTw&usqp=CAU"}
     >
       <Flex
       margin={"auto"}
@@ -33,8 +33,8 @@ const Login = (): JSX.Element => {
         height={"45%"}
         boxShadow={"1rem 1rem 2.5rem"}
         color={"black"}
-        background={"white"}
         
+        backgroundImage={"https://institutodoartesao.com/wp-content/uploads/2022/02/papel-de-parede-quarto-bebe-menino-azul-claro-liso-ssca-076-papel-de-parede-para-quarto-de-bebe.jpg"}
       >
         <Text fontSize="3rem" fontWeight="bold" mb={4}>
           Login
