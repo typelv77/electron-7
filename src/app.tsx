@@ -1,4 +1,4 @@
-import Login from "./compnents";
+import Login from "./compnents/Login";
 
 const App= (): JSX.Element => {
   return (
