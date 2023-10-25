@@ -16,7 +16,7 @@ const Home = ({ setLogged }: IProps) => {
 
   return  (
     <>
-      <button onClick={logout}>Logout</button>
+      <button  id="Log"onClick={logout}>Logout</button>
       <Flex
         border={"1px solid black"}
         width={"60rem"}
