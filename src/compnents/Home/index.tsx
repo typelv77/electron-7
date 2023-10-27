@@ -2,6 +2,7 @@ import { Box, Button, Flex, FormControl, Input, TagLabel, Textarea } from "@chak
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Api from "../../Api";
+import ImageUpload from "../ImageUpload";
 
 interface IProps {
   setLogged: React.Dispatch<React.SetStateAction<boolean>>;
@@ -12,12 +13,13 @@ const Home = ({ setLogged }: IProps) => {
   const [chatid, setChatId]=useState<string>()
   const [schedule, setSchedule]=useState<string>()
   const [message, setMessage]=useState<string>()
+  const [images, setImages]=useState<[] | string[]>([]);
 
 
   const sendDatos = async () => {
 
     try {
-      await Api.post("telegram/send",{tokenbot, chatid, schedule, message})
+      await Api.post("telegram/send",{tokenbot, chatid, schedule, message , images})
       alert("Mensagem programada!")
     } catch (error){ 
       alert("Error ao programar mensagem!!")
@@ -41,7 +43,7 @@ const Home = ({ setLogged }: IProps) => {
       <Flex
         border={"1px solid black"}
         width={"60rem"}
-        height={"40rem"}
+        minHeight={"40rem"}
         flexDirection={"column"}
         alignItems={"center"}
         gap={"1rem"}
@@ -64,6 +66,7 @@ const Home = ({ setLogged }: IProps) => {
         padding={"0.5"}
         borderRadius={"1rem"}
         onChange={(e)=>setTokenBot(e.target.value)}
+
  />
         </FormControl>
 
@@ -109,27 +112,7 @@ const Home = ({ setLogged }: IProps) => {
         ></Textarea>
         </FormControl>
 
-       <Box 
-       gap={""}
-        borderStyle={"dotted"} 
-        width={"80%"}
-        height={"3rem"}
-        padding={"0.5"}
-        borderRadius={"1.5rem"}
-        fontSize={"1.5rem"}
-        textAlign={"center"}
-        display={"flex"}
-        justifyContent={"center"}
-        flexDirection={"column"}
-        color={"black"}
-        fontWeight={"800"} 
-        >
-        <text>Clique ou arraste para adicionar arquivos</text>
-        </Box>
-         
-         <Box display={"flex"} justifyContent={"flex-start"} width={"80%"} color={"black"}fontWeight={"800"} >
-         <span>Imagens selecionadas:</span>
-         </Box>
+       <ImageUpload images={images} setImages={setImages} maxImages={8}/>
 
         <Button 
         padding={"1rem"} 
@@ -141,8 +124,9 @@ const Home = ({ setLogged }: IProps) => {
         cursor={"pointer"}
         _hover={{color:"white" }}
         onClick={sendDatos}
+        marginBottom={"2rem"}
         >Programar mensagem</Button>
-
+       
       </Flex>
     </>
   );
