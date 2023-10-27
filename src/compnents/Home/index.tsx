@@ -1,11 +1,32 @@
 import { Box, Button, Flex, FormControl, Input, TagLabel, Textarea } from "@chakra-ui/react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Api from "../../Api";
 
 interface IProps {
   setLogged: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const Home = ({ setLogged }: IProps) => {
+  const [tokenbot, setTokenBot]=useState<string>()
+  const [chatid, setChatId]=useState<string>()
+  const [schedule, setSchedule]=useState<string>()
+  const [message, setMessage]=useState<string>()
+
+
+  const sendDatos = async () => {
+
+    try {
+      await Api.post("telegram/send",{tokenbot, chatid, schedule, message})
+      alert("Mensagem programada!")
+    } catch (error){ 
+      alert("Error ao programar mensagem!!")
+
+    }
+
+  };
+
+
   const navigate = useNavigate();
 
   const logout = () => {
@@ -42,6 +63,7 @@ const Home = ({ setLogged }: IProps) => {
         height={"1.5rem"} 
         padding={"0.5"}
         borderRadius={"1rem"}
+        onChange={(e)=>setTokenBot(e.target.value)}
  />
         </FormControl>
 
@@ -53,8 +75,26 @@ const Home = ({ setLogged }: IProps) => {
         height={"1.5rem"} 
         padding={"0.5"} 
         borderRadius={"1rem"}
-        color={"red"}/>
+        color={"red"}
+        onChange={(e)=>setChatId(e.target.value)}
+        />
+        
         </FormControl>
+
+        <FormControl display={"flex"} flexDirection={"column"} color={"black"}fontWeight={"800"} >
+        <label >Data de hora de envio:</label>
+        <Input 
+        id="date time"
+        type="datetime-local"
+        width={"48rem"} 
+        height={"1.5rem"} 
+        padding={"0.5"} 
+        borderRadius={"1rem"}
+        color={"black"}
+        onChange={(e)=>setSchedule(e.target.value)}
+        />
+        </FormControl>
+
         
         <FormControl display={"flex"} flexDirection={"column"} color={"black"}fontWeight={"800"} >
         <label >Mensagem:</label>
@@ -65,6 +105,7 @@ const Home = ({ setLogged }: IProps) => {
           padding={"0.5"}
           borderRadius={"1rem"}
           color={"black"}
+          onChange={(e)=>setMessage(e.target.value)}
         ></Textarea>
         </FormControl>
 
@@ -99,6 +140,7 @@ const Home = ({ setLogged }: IProps) => {
         background={"#08e8a1"} 
         cursor={"pointer"}
         _hover={{color:"white" }}
+        onClick={sendDatos}
         >Programar mensagem</Button>
 
       </Flex>
