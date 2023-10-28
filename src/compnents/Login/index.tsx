@@ -120,7 +120,7 @@ const Login = ({ setLogged }: IProps): JSX.Element => {
 
         <Text mt={2}>
           Ainda não tem uma conta?{" "}
-          <Link color="teal.500" href="#">
+          <Link color="teal.500" href="#register">
             Criar novo usuário
           </Link>
         </Text>
@@ -130,10 +130,3 @@ const Login = ({ setLogged }: IProps): JSX.Element => {
 };
 
 export default Login;
-function setPassword(arg0: string) {
-  throw new Error("Function not implemented.");
-}
-
-function setEmail(arg0: string) {
-  throw new Error("Function not implemented.");
-}
