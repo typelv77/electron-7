@@ -75,7 +75,7 @@ const Login = ({ setLogged }: IProps): JSX.Element => {
           Login
         </Text>
         <FormControl>
-          <FormLabel>Email</FormLabel>
+          <FormLabel fontWeight={"800"}>Email</FormLabel>
           <Input
             type="email"
             placeholder="Seu email:"
@@ -89,7 +89,7 @@ const Login = ({ setLogged }: IProps): JSX.Element => {
         </FormControl>
 
         <FormControl mt={4}>
-          <FormLabel>Senha</FormLabel>
+          <FormLabel fontWeight={"800"}>Senha</FormLabel>
           <Input
             type="password"
             placeholder="Sua senha:"
@@ -108,12 +108,18 @@ const Login = ({ setLogged }: IProps): JSX.Element => {
           width="8rem"
           borderRadius={"10px"}
           onClick={submit}
+          cursor={"pointer"}
+        _hover={{color:"#C0C0C0" }}
+        color={"white"}
+        background={"#00BFFF"}
         >
           Entrar
         </Button>
 
         <Text mt={2}>
-          <Link color="teal.500" href="#">
+          <Link 
+          color="teal.500" 
+          href="#">
             Esqueceu a senha?
           </Link>
         </Text>
