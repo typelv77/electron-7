@@ -3,6 +3,7 @@ import Login from "../compnents/Login";
 import Home from "../compnents/Home";
 import { useEffect } from "react";
 import NewUser from "../compnents/NewUser";
+import RecoverPassword from "../compnents/RecoverPassword";
 
 interface IProps {
   logged: boolean
@@ -19,6 +20,7 @@ const Routes = ({logged, setLogged}:IProps): JSX.Element => {
         <Route path="/login" element={ <Login setLogged={setLogged}/>}/>
         <Route path="/Home" element={ <Home setLogged={setLogged} />}/>
         <Route path="/Register" element={<NewUser/>}/>
+        <Route path="/recover" element={<RecoverPassword/>}/>
         </Switch>
       </HashRouter>
     </>

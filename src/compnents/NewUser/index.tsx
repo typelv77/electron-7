@@ -101,6 +101,8 @@ const NewUser = () => {
       </FormControl>
       
       <ImageUpload images={picture} setImages={setPicture} maxImages={1}/>
+      
+      <Flex gap={"10rem"}>
 
       <Button 
         padding={"1rem"} 
@@ -114,6 +116,21 @@ const NewUser = () => {
         onClick={sendDatos}
         marginBottom={"2rem"}
         >Confirmar</Button>
+
+<Button 
+        padding={"1rem"} 
+        borderRadius={"1.3rem"} 
+        border={"none"} 
+        fontWeight={"800"} 
+        color={"black"} 
+        background={"#FF0000"} 
+        cursor={"pointer"}
+        _hover={{color:"white" }}
+        onClick={()=>navigate("/")}
+        marginBottom={"2rem"}
+        >Cancelar</Button>
+      </Flex>
+
 
     </Flex>)
 
