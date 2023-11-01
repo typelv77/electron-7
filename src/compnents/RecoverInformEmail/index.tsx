@@ -13,10 +13,22 @@ import {
 import Api from "../../Api";
 import { useNavigate } from "react-router-dom";
 
+interface IProps {
+   setBooleanTokenEmail: React.Dispatch<React.SetStateAction<boolean>>
+   setBooleanInformEmail: React.Dispatch<React.SetStateAction<boolean>>
+} 
 
-const RecoverInformEmail = (): JSX.Element => {
+const RecoverInformEmail = ({setBooleanTokenEmail,setBooleanInformEmail}: IProps): JSX.Element => {
   const [email, setEmail] = useState<string>("");
   const navigate = useNavigate();
+
+
+
+  const submit = () => {
+    setBooleanInformEmail(false)
+    setBooleanTokenEmail(true)
+    alert("Caso o email for verdadeiro, será enviado um email de verificação, verifique em sua caxa de correio ou span")
+  }
 
 
   return (
@@ -47,7 +59,7 @@ const RecoverInformEmail = (): JSX.Element => {
         }
       >
         <Text fontSize="3rem" fontWeight="bold" mb={4}>
-          Corfime seu Email
+          Corfime o Email
         </Text>
         <FormControl>
           <FormLabel fontWeight={"800"}>Digite seu email cadastrado</FormLabel>
@@ -77,6 +89,7 @@ const RecoverInformEmail = (): JSX.Element => {
           cursor={"pointer"}
           _hover={{color:"white" }}
           marginBottom={"2rem"}
+          onClick={submit}
 
         >Confirmar</Button>
 

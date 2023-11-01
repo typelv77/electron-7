@@ -13,11 +13,18 @@ import {
 import Api from "../../Api";
 import { useNavigate } from "react-router-dom";
 
-
-const RecoverInformTokenEmail= (): JSX.Element => {
+interface IProps {
+    setBooleanInformNewPassword: React.Dispatch<React.SetStateAction<boolean>>;
+    setBooleanTokenEmail: React.Dispatch<React.SetStateAction<boolean>>;
+}
+const RecoverInformTokenEmail= ({  setBooleanTokenEmail, setBooleanInformNewPassword}: IProps): JSX.Element => {
   const [TokenEmail, setTokenEmail] = useState<string>("");
   const navigate = useNavigate();
 
+  const submit = ()=> {
+    setBooleanTokenEmail(false)
+    setBooleanInformNewPassword(true)
+};
 
   return (
     <Box
@@ -77,6 +84,7 @@ const RecoverInformTokenEmail= (): JSX.Element => {
           cursor={"pointer"}
           _hover={{color:"white" }}
           marginBottom={"2rem"}
+          onClick={submit}
 
         >Confirmar</Button>
 

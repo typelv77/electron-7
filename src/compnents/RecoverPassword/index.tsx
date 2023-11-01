@@ -13,15 +13,27 @@ import {
 import Api from "../../Api";
 import { useNavigate } from "react-router-dom";
 
-interface IProps {
-  setLogged: React.Dispatch<React.SetStateAction<boolean>>;
+
+interface IProps  {
+  setBooleanInformEmail:  React.Dispatch<React.SetStateAction<boolean>>;
+  setBooleanInformTokenEmail:React.Dispatch<React.SetStateAction<boolean>>;
+  setBooleanInformNewPassword:React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const RecoverPassword = (): JSX.Element => {
+const RecoverPassword = ({setBooleanInformEmail,setBooleanInformTokenEmail, setBooleanInformNewPassword}: IProps): JSX.Element => {
   const [newPassword, setNewPassword] = useState<string>("");
   const [confirmNewPassword, setConfirmNewPassword] = useState<string>("");
   const navigate = useNavigate();
 
+ const submit =() =>{
+  navigate("/")
+  alert("Senha alterada com sucesso!")
+  setBooleanInformEmail(true);
+  setBooleanInformTokenEmail(false);
+  setBooleanInformNewPassword(false);
+
+
+ }
 
   return (
     <Box
@@ -93,6 +105,7 @@ const RecoverPassword = (): JSX.Element => {
           cursor={"pointer"}
           _hover={{color:"white" }}
           marginBottom={"2rem"}
+          onClick={submit}
 
         >Confirmar</Button>
 

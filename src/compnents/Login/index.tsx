@@ -119,7 +119,7 @@ const Login = ({ setLogged }: IProps): JSX.Element => {
         <Text mt={2}>
           <Link 
           color="teal.500" 
-          href="#">
+          href="#recover">
             Esqueceu a senha?
           </Link>
         </Text>
