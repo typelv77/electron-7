@@ -24,10 +24,13 @@ const RecoverInformEmail = ({setBooleanTokenEmail,setBooleanInformEmail}: IProps
 
 
 
-  const submit = () => {
-    setBooleanInformEmail(false)
-    setBooleanTokenEmail(true)
-    alert("Caso o email for verdadeiro, será enviado um email de verificação, verifique em sua caxa de correio ou span")
+  const submit = async () => {
+    localStorage.setItem("e", email)
+      await Api.post("/user/recover",{email})
+      setBooleanInformEmail(false);
+      setBooleanTokenEmail(true);
+      alert("Caso o email for verdadeiro, será enviado um email de verificação, verifique em sua caxa de correio ou span");
+  
   }
 
 

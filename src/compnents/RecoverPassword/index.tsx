@@ -25,12 +25,22 @@ const RecoverPassword = ({setBooleanInformEmail,setBooleanInformTokenEmail, setB
   const [confirmNewPassword, setConfirmNewPassword] = useState<string>("");
   const navigate = useNavigate();
 
- const submit =() =>{
-  navigate("/")
-  alert("Senha alterada com sucesso!")
-  setBooleanInformEmail(true);
-  setBooleanInformTokenEmail(false);
-  setBooleanInformNewPassword(false);
+ const submit =async () =>{
+  try {
+    const user =JSON.parse(localStorage.getItem("u"))
+    const headers = {
+      'Authorization': `Bearer ${user.access_token}`
+    }
+    await Api.patch(`user/${user.id}`, {password: newPassword},{headers});
+    navigate("/")
+    alert("Senha alterada com sucesso!")
+    setBooleanInformEmail(true);
+    setBooleanInformTokenEmail(false);
+    setBooleanInformNewPassword(false);
+
+  } catch (error) {
+    
+  }
 
 
  }

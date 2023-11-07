@@ -12,6 +12,7 @@ import {
 } from "@chakra-ui/react";
 import Api from "../../Api";
 import { useNavigate } from "react-router-dom";
+import { constants } from "buffer";
 
 interface IProps {
     setBooleanInformNewPassword: React.Dispatch<React.SetStateAction<boolean>>;
@@ -21,9 +22,18 @@ const RecoverInformTokenEmail= ({  setBooleanTokenEmail, setBooleanInformNewPass
   const [TokenEmail, setTokenEmail] = useState<string>("");
   const navigate = useNavigate();
 
-  const submit = ()=> {
-    setBooleanTokenEmail(false)
-    setBooleanInformNewPassword(true)
+  const submit = async ()=> {
+    try {
+      const email = localStorage.getItem("e")
+      console.log({email, token: TokenEmail})
+       const response = await Api.post("auth/login-recover", {email, token: +TokenEmail})
+       localStorage.setItem("u", response.data);
+      setBooleanTokenEmail(false)
+      setBooleanInformNewPassword(true)
+    } catch (error) {
+      alert("Token invalido ou expirado")
+      
+    }
 };
 
   return (
