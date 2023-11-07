@@ -21,12 +21,17 @@ interface IProps {
 const RecoverInformEmail = ({setBooleanTokenEmail,setBooleanInformEmail}: IProps): JSX.Element => {
   const [email, setEmail] = useState<string>("");
   const navigate = useNavigate();
+  const [loading, setLoading] = useState<boolean>(false)
 
-
+   const switchLoading=()=>{
+    setLoading(!loading)
+   }
 
   const submit = async () => {
     localStorage.setItem("e", email)
-      await Api.post("/user/recover",{email})
+    switchLoading()
+      await Api.post("/user/recover",{email});
+      switchLoading()
       setBooleanInformEmail(false);
       setBooleanTokenEmail(true);
       alert("Caso o email for verdadeiro, será enviado um email de verificação, verifique em sua caxa de correio ou span");
@@ -92,6 +97,7 @@ const RecoverInformEmail = ({setBooleanTokenEmail,setBooleanInformEmail}: IProps
           cursor={"pointer"}
           _hover={{color:"white" }}
           marginBottom={"2rem"}
+          isLoading={loading}
           onClick={submit}
 
         >Confirmar</Button>

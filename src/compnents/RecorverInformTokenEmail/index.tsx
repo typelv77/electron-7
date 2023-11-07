@@ -21,13 +21,21 @@ interface IProps {
 const RecoverInformTokenEmail= ({  setBooleanTokenEmail, setBooleanInformNewPassword}: IProps): JSX.Element => {
   const [TokenEmail, setTokenEmail] = useState<string>("");
   const navigate = useNavigate();
+  const [loading, setLoading] = useState<boolean>(false)
+
+  const switchLoading = () => {
+    setLoading(!loading)
+  }
+  
 
   const submit = async ()=> {
     try {
       const email = localStorage.getItem("e")
       console.log({email, token: TokenEmail})
+      switchLoading()
        const response = await Api.post("auth/login-recover", {email, token: +TokenEmail})
-       localStorage.setItem("u", response.data);
+       localStorage.setItem("u",JSON.stringify(response.data));
+       switchLoading()
       setBooleanTokenEmail(false)
       setBooleanInformNewPassword(true)
     } catch (error) {
@@ -94,6 +102,7 @@ const RecoverInformTokenEmail= ({  setBooleanTokenEmail, setBooleanInformNewPass
           cursor={"pointer"}
           _hover={{color:"white" }}
           marginBottom={"2rem"}
+          isLoading={loading}
           onClick={submit}
 
         >Confirmar</Button>

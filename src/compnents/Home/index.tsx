@@ -14,14 +14,22 @@ const Home = ({ setLogged }: IProps) => {
   const [schedule, setSchedule]=useState<string>()
   const [message, setMessage]=useState<string>()
   const [images, setImages]=useState<[] | string[]>([]);
+  const [loading, setLoading] = useState<boolean>(false)
+
+   const switchLoading=()=>{
+    setLoading(!loading)
+   }
 
 
   const sendDatos = async () => {
 
     try {
+      switchLoading()
       await Api.post("telegram/send",{tokenbot, chatid, schedule, message , images})
       alert("Mensagem programada!")
+      switchLoading()
     } catch (error){ 
+      setLoading(false)
       alert("Error ao programar mensagem!!")
 
     }
@@ -125,6 +133,7 @@ const Home = ({ setLogged }: IProps) => {
         _hover={{color:"white" }}
         onClick={sendDatos}
         marginBottom={"2rem"}
+        isLoading={loading}
         >Programar mensagem</Button>
        
       </Flex>

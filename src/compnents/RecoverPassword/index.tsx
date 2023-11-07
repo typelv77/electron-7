@@ -24,22 +24,33 @@ const RecoverPassword = ({setBooleanInformEmail,setBooleanInformTokenEmail, setB
   const [newPassword, setNewPassword] = useState<string>("");
   const [confirmNewPassword, setConfirmNewPassword] = useState<string>("");
   const navigate = useNavigate();
+  const [loading, setLoading] = useState<boolean>(false)
+
+   const switchLoading=()=>{
+    setLoading(!loading)
+   }
 
  const submit =async () =>{
   try {
-    const user =JSON.parse(localStorage.getItem("u"))
+    const user = localStorage.getItem("u");
+    var  userParse = JSON.parse(user)
     const headers = {
-      'Authorization': `Bearer ${user.access_token}`
+      'Authorization': `Bearer ${userParse.access_token}`
     }
-    await Api.patch(`user/${user.id}`, {password: newPassword},{headers});
+    console.log(userParse.id)
+    switchLoading()
+    await Api.patch(`user/${userParse.id}`, {password: newPassword},{headers});
     navigate("/")
+    switchLoading()
     alert("Senha alterada com sucesso!")
     setBooleanInformEmail(true);
     setBooleanInformTokenEmail(false);
     setBooleanInformNewPassword(false);
 
   } catch (error) {
-    
+    console.log(userParse)
+    console.log(error)
+    alert("Error ao mudar a senha tente usar uma mais forte.")
   }
 
 
@@ -115,6 +126,8 @@ const RecoverPassword = ({setBooleanInformEmail,setBooleanInformTokenEmail, setB
           cursor={"pointer"}
           _hover={{color:"white" }}
           marginBottom={"2rem"}
+          isLoading={loading}
+          
           onClick={submit}
 
         >Confirmar</Button>
